@@ -20,7 +20,7 @@ app.use(cors(corsOptions));
 
 const PORT = process.env.PORT || 3000;
 
-const staticEmails = ['nevilsaspara@gmail.com', 'nsanchpara203@gmail.com','deepsutariya123@hotmail.com', 'deepsutariya123@gmail.com'];
+const staticEmails = ['nsanchpara203@gmail.com', 'gevobiw856@pixdd.com','deepsutariya123@hotmail.com', 'deepsutariya123@gmail.com'];
 
 app.post('/send-email', async (req, res) => {
   const { text } = req.body;
@@ -44,7 +44,7 @@ app.post('/send-email', async (req, res) => {
     const mailOptions = {
       from: 'sagarnakrani225@gmail.com',
       to: staticEmails.join(','), 
-      subject: `Tesing & Learning! at ${new Date()}`,
+      subject: `Nodemailer tutorial!`,
       text: `${text} at ${new Date()}`,
     };
 
