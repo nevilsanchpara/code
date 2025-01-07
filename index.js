@@ -3,9 +3,19 @@ const nodemailer = require('nodemailer');
 const dotenv = require('dotenv');
 
 dotenv.config();
+let corsOptions = {
+  origin: "*"
+};
+
 
 const app = express();
 app.use(express.json());
+app.use((req, res, next) => {
+   res.header({"Access-Control-Allow-Origin": "*"}); 
+   next(); 
+})
+app.use(cors(corsOptions));
+
 
 const PORT = process.env.PORT || 3000;
 
@@ -39,7 +49,7 @@ app.post('/send-email', async (req, res) => {
 
     await transporter.sendMail(mailOptions);
 
-    res.status(200).json({ message: 'Email sent successfully to static recipients' });
+    res.status(200).json({ message: 'Email sent successfully!!' });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Failed to send email', error });
