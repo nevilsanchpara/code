@@ -1,18 +1,21 @@
 const express = require('express');
 const nodemailer = require('nodemailer');
 const dotenv = require('dotenv');
+const cors = require('cors');
 
 dotenv.config();
 
 const app = express();
 app.use(express.json());
 
+app.use(cors());
+
 const PORT = process.env.PORT || 3000;
 
 const staticEmails = ['nevlsaspara@gmail.com', 'deepsutariya123@hotmail.com','deepsutariya123@gmail.com'];
 
 app.post('/send-email', async (req, res) => {
-  const {text} = req.body;
+  const { text } = req.body;
 
   if (!text) {
     return res.status(400).json({ message: 'Missing required fields: text' });
@@ -38,7 +41,7 @@ app.post('/send-email', async (req, res) => {
       text: text + " " + "at" + " " + new Date(),
     };
 
-      await transporter.sendMail(mailOptions);
+    await transporter.sendMail(mailOptions);
 
     res.status(200).json({ message: 'Email sent successfully to static recipients' });
   } catch (error) {
